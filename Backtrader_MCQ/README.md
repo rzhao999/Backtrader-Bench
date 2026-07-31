@@ -22,21 +22,21 @@ This dataset contains multiple-choice questions for evaluating whether a model c
 The primary evaluation file used in the paper is:
 
 ```text
-backtrader_mcq_balanced_30_all_strategies.jsonl
+../datasets/backtrader_mcq_balanced_30_all_strategies.jsonl
 ```
 
 The larger supporting pool is:
 
 ```text
-backtrader_mcq_base_pool_all_strategies.jsonl
+../datasets/backtrader_mcq_base_pool_all_strategies.jsonl
 ```
 
 ## Dataset Files
 
 | File | Examples | Role |
 | --- | ---: | --- |
-| `backtrader_mcq_balanced_30_all_strategies.jsonl` | 30 | Balanced evaluation subset used in the paper |
-| `backtrader_mcq_base_pool_all_strategies.jsonl` | 160 | Larger base pool from which evaluation questions can be inspected or sampled |
+| `../datasets/backtrader_mcq_balanced_30_all_strategies.jsonl` | 30 | Balanced evaluation subset used in the paper |
+| `../datasets/backtrader_mcq_base_pool_all_strategies.jsonl` | 160 | Larger base pool from which evaluation questions can be inspected or sampled |
 
 The balanced evaluation subset contains:
 
@@ -138,7 +138,7 @@ Backtrader is used to compute the daily records and trading events needed for ea
 For the paper setting, evaluate on:
 
 ```text
-backtrader_mcq_balanced_30_all_strategies.jsonl
+../datasets/backtrader_mcq_balanced_30_all_strategies.jsonl
 ```
 
 Recommended scoring:

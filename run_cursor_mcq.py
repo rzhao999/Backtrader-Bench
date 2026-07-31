@@ -14,7 +14,7 @@ from typing import Any
 
 
 ANSWER_RE = re.compile(r"<<<\s*([A-D])\s*>>>", re.IGNORECASE)
-DEFAULT_INPUT = "Backtrader_MCQ/backtrader_mcq_balanced_30_all_strategies.jsonl"
+DEFAULT_INPUT = "datasets/backtrader_mcq_balanced_30_all_strategies.jsonl"
 DEFAULT_OUTPUT_DIR = "cursor_agent_runs"
 DEFAULT_AGENT_BIN = "agent"
 DEFAULT_TIMEOUT = 120

@@ -28,8 +28,8 @@ such as `verified-well-pose`, `easy-discarded`, `tool-solver-correct`,
 
 Bundled benchmark files:
 
-- `Backtrader_MCQ/backtrader_mcq_balanced_30_all_strategies.jsonl`
-- `Backtrader_MCQ/backtrader_mcq_base_pool_all_strategies.jsonl`
+- `datasets/backtrader_mcq_balanced_30_all_strategies.jsonl`
+- `datasets/backtrader_mcq_base_pool_all_strategies.jsonl`
 - `Backtrader_MCQ/croissant.json`
 
 ## Setup
@@ -108,7 +108,7 @@ Tool-enabled runner:
 
 ```bash
 .venv/bin/python run_cursor_mcq.py \
-  --input Backtrader_MCQ/backtrader_mcq_balanced_30_all_strategies.jsonl \
+  --input datasets/backtrader_mcq_balanced_30_all_strategies.jsonl \
   --model composer-2 \
   --timeout 180
 ```
@@ -117,7 +117,7 @@ No-tools runner:
 
 ```bash
 node run_cursor_sdk_mcq_notool.mjs \
-  --input Backtrader_MCQ/backtrader_mcq_balanced_30_all_strategies.jsonl \
+  --input datasets/backtrader_mcq_balanced_30_all_strategies.jsonl \
   --model composer-2 \
   --timeout 120
 ```
