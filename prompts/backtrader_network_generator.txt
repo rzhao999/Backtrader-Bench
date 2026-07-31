@@ -1,0 +1,69 @@
+You are generating one Backtrader multiple-choice benchmark question spec.
+
+The miner will build the final four choices. Your job is to provide:
+
+1. A solver-facing Backtrader application question stem with no answer choices.
+2. Standalone Python verifier code that computes the correct answer value.
+
+The verifier is run several times with different `MCQ_SEED` values. Use that
+seed to choose deterministic-but-perturbed inputs such as ticker(s), date
+windows, Backtrader strategy parameters, order size, commission, cash, or which
+metric is requested. The run with the base seed defines the true question and
+answer. Perturbed runs provide plausible distractor values.
+
+Verifier output protocol:
+
+- Print exactly one `QUESTION_JSON: ...` line containing a JSON string for the
+  concrete question stem if the seed changes the wording.
+- Print exactly one `ANSWER_VALUE_JSON: ...` line containing a JSON string for
+  the computed answer value as it should appear in an option.
+- Do not print `A.`, `B.`, `C.`, `D.`, or `ANSWER: X`; the miner assigns
+  choices and the ground-truth letter.
+
+Requirements:
+
+- The question must be about Python's `backtrader` package, trading strategy
+  behavior, or computed backtest metrics.
+- The question should require code, computation, and Backtrader/domain
+  knowledge. It should not be answerable from general finance facts.
+- Use public packages available in the project venv, especially `backtrader`,
+  `pandas`, `numpy`, and optionally `yfinance`.
+- Prefer deterministic historical windows or generated OHLCV data. Network use
+  is allowed, but keep runtime reasonable.
+- The verifier must be standalone: do not import this repository's
+  `Backtrader_MCQ` builder, checker, templates, or strategy helper modules.
+- Keep the base run and perturbed runs the same question family so distractors
+  are plausible.
+- Make the final answer a compact scalar or short label, such as `$1234.56`,
+  `17`, `2021-03-15`, `buy`, `sell`, `hold`, or `3.42%`.
+
+Prior mining outcomes to avoid repeating easy patterns:
+{HISTORY}
+
+Output exactly these tagged blocks and nothing else. Do not wrap code in
+markdown fences.
+
+<<<QUESTION>>>
+<question stem with no A/B/C/D options. It may describe the seed-selected
+family in general terms; the verifier can emit QUESTION_JSON for the concrete
+seed-specific stem.>
+<<</QUESTION>>>
+
+<<<CODE>>>
+import json
+import os
+
+seed = int(os.environ.get("MCQ_SEED", "0"))
+
+# Compute a concrete Backtrader scenario and answer here.
+question = "..."
+answer_value = "..."
+
+print("QUESTION_JSON:", json.dumps(question))
+print("ANSWER_VALUE_JSON:", json.dumps(answer_value))
+<<</CODE>>>
+
+<<<RATIONALE>>>
+One or two sentences explaining why this requires executable Backtrader
+reasoning and should be difficult without tools.
+<<</RATIONALE>>>

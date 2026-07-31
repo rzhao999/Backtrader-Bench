@@ -1,0 +1,12 @@
+question_text = """
+Use SciPy to answer the following question.
+
+{QUESTION}
+
+A. {OPTION_A}
+B. {OPTION_B}
+C. {OPTION_C}
+D. {OPTION_D}
+
+Your response should be in the form <<< X >>>, where X is either A, B, C, or D.
+"""

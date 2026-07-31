@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@cursor/sdk": "^1.0.12"
+  }
+}

@@ -1,0 +1,46 @@
+# Python environments and caches
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Local runtime artifacts
+logs/
+cursor_agent_runs/
+cursor_sdk_notools_runs/
+db/*.jsonl
+db/*.json
+db/*.tmp
+db/mcq/
+db/attempts/
+db/summary/
+*.out
+*.log
+docs/
+
+# Local secrets / machine-specific config
+.env
+.env.*
+
+# Generated Backtrader outputs
+Backtrader_MCQ/test_*.json
+Backtrader_MCQ/output/
+Backtrader_MCQ/**/output/
+
+# Packaging artifacts
+node_modules/
+build/
+dist/
+*.egg-info/
+
+# OS/editor noise
+.DS_Store
+.vscode/
+.idea/
