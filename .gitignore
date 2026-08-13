@@ -28,6 +28,7 @@ docs/
 # Local secrets / machine-specific config
 .env
 .env.*
+.serena/
 
 # Generated Backtrader outputs
 Backtrader_MCQ/test_*.json

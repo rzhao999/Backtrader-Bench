@@ -1,5 +1,11 @@
 # Backtrader MCQ Mining
 
+[![arXiv](https://img.shields.io/badge/arXiv-2608.11232-b31b1b.svg)](https://arxiv.org/abs/2608.11232)
+
+Code and data for [*Backtrader-Bench: Benchmarking LLM Agents on Algorithmic
+Trading with Self-Generated MCQs*](https://arxiv.org/abs/2608.11232) (FinLLM
+Workshop, IJCAI 2026).
+
 This repository mines multiple-choice questions about Python's `backtrader`
 package. Each mined question is verified by executable Python, screened by a
 no-tool Cursor agent, and then checked by a tool-enabled Cursor agent.
@@ -157,4 +163,18 @@ Compile the maintained Python modules:
   Backtrader_MCQ/backtrader_MCQ_pipeline.py \
   Backtrader_MCQ/backtrader_info.py \
   Backtrader_MCQ/strategies.py
+```
+
+## Citation
+
+```bibtex
+@article{zhao2026backtraderbench,
+  title   = {Backtrader-Bench: Benchmarking LLM Agents on Algorithmic Trading
+             with Self-Generated MCQs},
+  author  = {Zhao, Ruoxi and Raissi, Maziar},
+  journal = {arXiv preprint arXiv:2608.11232},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2608.11232},
+  note    = {FinLLM Workshop, IJCAI 2026}
+}
 ```
