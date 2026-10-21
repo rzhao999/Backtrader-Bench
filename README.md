@@ -1,21 +1,62 @@
-# Backtrader MCQ Mining
+# Backtrader-Bench
 
 [![arXiv](https://img.shields.io/badge/arXiv-2608.11232-b31b1b.svg)](https://arxiv.org/abs/2608.11232)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)
 
 Code and data for [*Backtrader-Bench: Benchmarking LLM Agents on Algorithmic
-Trading with Self-Generated MCQs*](https://arxiv.org/abs/2608.11232) (FinLLM
-Workshop, IJCAI 2026).
+Trading with Self-Generated MCQs*](https://arxiv.org/abs/2608.11232)
+(Ruoxi Zhao and Maziar Raissi, FinLLM Workshop @ IJCAI 2026).
 
-This repository mines multiple-choice questions about Python's `backtrader`
-package. Each mined question is verified by executable Python, screened by a
-no-tool Cursor agent, and then checked by a tool-enabled Cursor agent.
+Backtrader-Bench tests whether an LLM agent can *drive* a backtest, not just
+write trading code: run a `backtrader` strategy under a given configuration,
+read the numeric output, and report the right answer. Existing financial LLM
+benchmarks test NLP-level tasks or code generation; none test this kind of
+execution comprehension, where a single misused parameter yields a
+plausible-but-wrong P/L.
 
-The goal is not agent-vs-agent competition. The pipeline keeps hard,
-well-posed Backtrader application questions:
+The benchmark has two parts:
+
+- **Curated set.** A deterministic MCQ builder covering 5 strategies and 33
+  question templates across 3 difficulty tiers. Questions are generated at
+  runtime from seeds, so answers cannot be memorised, and an independent
+  checker re-derives every answer along the same execution path.
+- **Mined set.** A generator/solver pipeline that mines hard, well-posed
+  questions with no human in the loop. A generator agent writes a question
+  plus executable verifier code, a no-tool solver discards items it can
+  answer from memory, and a tool-enabled solver validates what remains.
+
+## Headline results
+
+<p align="center">
+  <img src="assets/figures/fig1_tool_vs_notool.png" width="48%" alt="Tool use lifts curated-benchmark accuracy from 73% to 90%">
+  <img src="assets/figures/fig2_curated_to_mined.png" width="48%" alt="Tool-free accuracy collapses on mined MCQs">
+</p>
+
+| Setting | Accuracy |
+|---|---|
+| Curated set, best tool-enabled agent (single pass) | 90.0% |
+| Curated set, best no-tool model (10-run average) | 73.0% |
+| Mined set, strongest no-tool models | about 60% |
+| Mined set, weaker no-tool models | near chance (25%) |
+
+Tool access is worth 17 points on the curated set. On the mined set, tool-free
+accuracy collapses: weaker models fall to roughly chance while the strongest
+plateau near 60%, bounded by the filter model. The hardest questions are
+order-mechanics scenarios, exactly where real trading errors are costly.
+Distractors sit 7 to 33% away from the correct value, so guessing by magnitude
+does not work. Evaluation covers 11 models without tools and 4 tool-enabled
+configurations; see the paper for confidence intervals and ablations.
+
+## How mining works
+
+Each mined question is verified by executable Python, screened by a no-tool
+agent, and then checked by a tool-enabled agent:
 
 - If the no-tool agent answers correctly, the MCQ is discarded as too easy.
 - If the no-tool agent misses or cannot answer, the MCQ is sent to the
   tool-enabled runner.
+
 All generated candidates are written to one run-level MCQ JSONL with labels
 such as `verified-well-pose`, `easy-discarded`, `tool-solver-correct`,
 `tool-solver-wrong`, and `verifier-fail`.
